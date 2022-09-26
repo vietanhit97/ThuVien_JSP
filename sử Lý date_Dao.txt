@@ -1,0 +1,23 @@
+	public Boolean insertStudent(Student student) {
+		// TODO Auto-generated method stub
+			boolean bl = false;
+			Connection conn = JDBCUtil.getConnection();
+			try {
+				PreparedStatement sPreparedStatement = conn.prepareStatement("Insert into Student (FullName,Gender,Birthday,Address,ClassName,ScholarShip) values (?,?,?,?,?,?)");
+				sPreparedStatement.setString(1, student.getFullName());
+				sPreparedStatement.setBoolean(2, student.isGender());
+				sPreparedStatement.setDate(3, new Date(student.getBirthday().getTime()));
+				sPreparedStatement.setString(4, student.getAddress());
+				sPreparedStatement.setString(5, student.getClassName());
+				sPreparedStatement.setDouble(6, student.getScholarShip());
+				int ketQua = sPreparedStatement.executeUpdate();
+				if(ketQua>0) {
+					return bl= true;
+				}
+				return bl =true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return bl;
+	}
